@@ -1,2 +1,1 @@
-# Test_API_Basic
-LernQA
+# Test_API_basic
