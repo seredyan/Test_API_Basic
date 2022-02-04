@@ -5,22 +5,10 @@ from _datetime import datetime
 
 
 class TestUserSignUp(BaseCase):
-    def setup(self):
-        self.url = "https://playground.learnqa.ru/api/user/"
-        base_part = "learnqa"
-        domain = "example.com"
-        random_part = datetime.now().strftime("%m%d%Y%H%M%S")
-        self.email = f"{base_part}{random_part}@{domain}"
-
+    url = "https://playground.learnqa.ru/api/user/"
 
     def test_create_user_successfully(self):  #4.2
-        data = {
-            'password': '123',
-            'username': 'learnqa',
-            'firstName': 'learnqa',
-            'lastName': 'learnqa',
-            'email': self.email
-        }
+        data = self.prepare_signingup_data()
 
         response = requests.post(self.url, data=data)
         Assertions.assert_code_status(response, 200)
@@ -29,13 +17,7 @@ class TestUserSignUp(BaseCase):
 
     def test_create_user_with_existing_email(self): #4.1
         email = 'vinkotov@example.com'
-        data = {
-            'password': '123',
-            'username': 'learnqa',
-            'firstName': 'learnqa',
-            'lastName': 'learnqa',
-            'email': email
-        }
+        data = self.prepare_signingup_data(email)
 
         response = requests.post(self.url, data=data)
 

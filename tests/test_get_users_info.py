@@ -6,6 +6,7 @@ from lib.assertions import Assertions
 class TestUserGet(BaseCase):   ##4.3
     def test_get_info_not_auth_user(self):
         url = "https://playground.learnqa.ru/api/user/2"
+
         response = requests.get(url)
 
         Assertions.assert_json_has_key(response, "username")
