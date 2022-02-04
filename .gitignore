@@ -2,6 +2,7 @@
 .idea
 .pytest_cashe
 __pycashe__/
+logs/*
 
 
 ### Linux ###
