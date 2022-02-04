@@ -3,13 +3,13 @@ import requests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
 
-class TestUserEdit(BaseCase):
+class TestUserEdit(BaseCase):  # 4.4
     url = "https://playground.learnqa.ru/api/user/"
     url_login = "https://playground.learnqa.ru/api/user/login"
 
     def test_edit_just_created_user(self):
 
-        # SIGN UP
+        # 1. SIGN UP
         signingup_data = self.prepare_signingup_data()
         response1 = requests.post(self.url, data=signingup_data)
         Assertions.assert_code_status(response1, 200)
@@ -20,7 +20,7 @@ class TestUserEdit(BaseCase):
         password = signingup_data['password']
         user_id = self.get_json_value(response1, "id")
 
-        # LOGIN
+        # 2. LOGIN
         login_data = {
             'email': email,
             'password': password
@@ -30,7 +30,7 @@ class TestUserEdit(BaseCase):
         auth_sid = self.get_cookie(response2, "auth_sid")
         token = self.get_header(response2, "x-csrf-token")
 
-        # EDIT
+        # 3. EDIT
         new_name = "Changed Name"
 
         url_user_id = f"https://playground.learnqa.ru/api/user/{user_id}"
@@ -42,7 +42,7 @@ class TestUserEdit(BaseCase):
                                  )
         Assertions.assert_code_status(response3, 200)
 
-        # GET
+        # 4. GET
         response4 = requests.get(url_user_id,
                                  headers={"x-csrf-token": token},
                                  cookies={"auth_sid": auth_sid},
