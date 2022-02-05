@@ -1,16 +1,16 @@
-import requests
+
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
-from _datetime import datetime
+from lib.my_requests import MyRequests
 
 
 class TestUserSignUp(BaseCase):
-    url = "https://playground.learnqa.ru/api/user/"
+    url = "/user/"
 
     def test_create_user_successfully(self):  #4.2
         data = self.prepare_signingup_data()
 
-        response = requests.post(self.url, data=data)
+        response = MyRequests.post(self.url, data=data)
         Assertions.assert_code_status(response, 200)
         Assertions.assert_json_has_key(response, 'id')
 
@@ -19,7 +19,7 @@ class TestUserSignUp(BaseCase):
         email = 'vinkotov@example.com'
         data = self.prepare_signingup_data(email)
 
-        response = requests.post(self.url, data=data)
+        response = MyRequests.post(self.url, data=data)
 
         Assertions.assert_code_status(response, 400)
         assert response.content.decode("utf-8") == f"Users with email '{email}' already exists", f"Unexpected response content {response.content}"
