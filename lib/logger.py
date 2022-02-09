@@ -7,8 +7,8 @@ from requests import Response
 
 class Logger:
     # new_log = f"logs/log_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
-    new_log = f"log_{str(datetime.datetime.now())}.log)"
-    file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../logs/", new_log)
+    new_logs = f"log_{str(datetime.datetime.now())}.log"
+    file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../logs/", new_logs)
 
 
 

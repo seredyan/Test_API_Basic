@@ -23,3 +23,14 @@ class TestUserSignUp(BaseCase):
 
         Assertions.assert_code_status(response, 400)
         assert response.content.decode("utf-8") == f"Users with email '{email}' already exists", f"Unexpected response content {response.content}"
+
+
+    def test_sign_up_user_with_wrong_email_format(self): # Exc 15.1
+        email = 'someemailexample.com'
+        data = self.prepare_signingup_data(email)
+
+        response = MyRequests.post(self.url, data=data)
+
+        Assertions.assert_code_status(response, 400)
+        assert response.content.decode("utf-8") == "Invalid email format", \
+            f"Unexpected response content {response.content}"
