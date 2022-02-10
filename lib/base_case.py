@@ -1,4 +1,7 @@
 import json.decoder
+import string
+import random
+
 from requests import Response
 from _datetime import datetime
 
@@ -43,3 +46,7 @@ class BaseCase:
             'lastName': 'learnqa',
             'email': email
         }
+
+    def random_username(self, prefix, maxlen):
+        symbols = string.ascii_letters
+        return prefix + "".join([random.choice(symbols) for i in range(random.randrange(250, maxlen))])
