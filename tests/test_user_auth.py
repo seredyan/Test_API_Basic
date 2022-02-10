@@ -1,3 +1,5 @@
+import random
+
 import pytest
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
@@ -51,6 +53,16 @@ class TestUserAuth(BaseCase):
             f"User id is NOT authorized with condition {condition}"
         )
 
+
+    def test_auth_user_requests_other_user_data(self): ## Exc 16
+        url_user_id = f"/user/{self.user_id_from_auth_method + random.randrange(2210, 2259)}"
+
+        response2 = MyRequests.get(url_user_id, cookies={"auth_sid": self.auth_sid}, headers={"x-csrf-token": self.token})
+        Assertions.assert_code_status(response2, 200)
+        Assertions.assert_json_has_key(response2, "username")
+        Assertions.assert_json_has_no_key(response2, "email")
+        Assertions.assert_json_has_no_key(response2, "firstName")
+        Assertions.assert_json_has_no_key(response2, "lastName")
 
 
 
