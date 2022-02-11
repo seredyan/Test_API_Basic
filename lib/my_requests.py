@@ -1,5 +1,6 @@
 import requests
 from lib.logger import Logger
+from environment import ENV_OBJECT
 
 class MyRequests():
     @staticmethod
@@ -24,7 +25,8 @@ class MyRequests():
     @staticmethod
     def _send(url: str, data: dict, headers: dict, cookies: dict, method: str):
 
-        url = f"https://playground.learnqa.ru/api{url}"
+        # url = f"https://playground.learnqa.ru/api{url}"   ## 4.5
+        url = f"{ENV_OBJECT.get_base_url()}{url}"    ## 4.9
 
         if headers is None:
             headers = {}
