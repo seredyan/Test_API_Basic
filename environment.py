@@ -9,8 +9,8 @@ class Environment:
     PROD = 'prod'
 
     URLS = {
-        DEV: 'https://playground.learnqa.ru/api_dev/map',
-        PROD: 'https://playground.learnqa.ru/api/map'
+        DEV: 'https://playground.learnqa.ru/api_dev',
+        PROD: 'https://playground.learnqa.ru/api'
     }
 
     def __init__(self):
